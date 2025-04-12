@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deepfake Detector</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Comfortaa', sans-serif;
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            background-color: #000;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(106, 90, 205, 0.7), rgba(30, 144, 255, 0.7));
+            z-index: 1;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="10"/><path d="M20 20L80 80M80 20L20 80" stroke="rgba(255,255,255,0.1)" stroke-width="10"/></svg>') repeat;
+            opacity: 0.3;
+            z-index: 2;
+        }
+
+        .center-box {
+            width: 500px;
+            padding: 20px;
+            border: 1px solid black;
+            background: rgba(106, 90, 205, 0.95);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            text-align: center;
+            position: relative;
+            z-index: 3;
+            color: white;
+        }
+
+        h1, h2 {
+            font-weight: 700;
+            color: white;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            width: 80%;
+            border: 1px solid black;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: 'Comfortaa', sans-serif;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: 1px solid black;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #000000;
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            border: 1px solid black;
+            background-color: #ff4d4d;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 3px;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Comfortaa', sans-serif;
+            z-index: 4;
+        }
+
+        .logout-btn:hover {
+            background-color: #cc0000;
+        }
+
+        label {
+            color: white;
+        }
+
+        .debug-text {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            z-index: 5;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop class="video-background" id="bg-video">
+        <source src="{{ url_for('serve_static', filename='background-video.mp4') }}" type="video/mp4">
+        <p class="debug-text">Video failed to load. Check console for errors or path: {{ url_for('serve_static', filename='background-video.mp4') }}</p>
+        Your browser does not support the video tag.
+    </video>
+
+    <a href="/logout" class="logout-btn">Logout</a>
+
+    <div class="center-box">
+        <h1>Deepfake Detection</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label>Select a video to analyze:</label><br>
+            <input type="file" name="video" accept="video/*" required><br><br>
+            <button type="submit">Detect</button>
+        </form>
+    </div>
+</body>
+</html>

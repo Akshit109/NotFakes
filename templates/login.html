@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - NotFakes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Comfortaa', sans-serif;
+            overflow: hidden;
+        }
+
+        
+        .video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-box {
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 2px solid black;
+            color: rgb(0, 0, 0);
+            padding: 30px;
+            border-radius: 6px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 400px;
+        }
+
+        input {
+            width: 85%;
+            height: 30px;
+            font-size: 16px;
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid black;
+            background-color: white;
+            color: #000000;
+        }
+
+        .login-btn {
+            background-color: #007BFF;
+            color: white;
+            font-size: 18px;
+            width: 70%;
+            height: 45px;
+            border: 1px solid black;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background-color: #000000;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        .footer-text {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .footer-text a {
+            color: #3e009a;
+        }
+    </style>
+</head>
+<body>
+
+
+    <video autoplay muted loop class="video-bg">
+        <source src="/ststic/background-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    
+    <div class="container">
+        <div class="login-box">
+            <h1>NotFakes</h1>
+            <form method="POST" action="/login">
+                <input type="text" name="username" placeholder="Enter Username" required><br>
+                <input type="password" name="password" placeholder="Enter password" required><br><br>
+                <button type="submit" class="login-btn">Log In</button>
+            </form>
+            <p class="footer-text">Don't have an account? <a href="/signup"><u>Sign Up</u></a></p>
+        </div>
+    </div>
+
+</body>
+</html>
